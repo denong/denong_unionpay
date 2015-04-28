@@ -42,6 +42,25 @@ module Unionpay
         response = connection.get 'auth/authStatus', params
         puts response.body
       end
+
+
+      def auth_answer answer_info
+        user_id = auth_info.respond_to?(:user_id) ? auth_info.user_id : auth_info[:user_id]
+        card = auth_info.respond_to?(:card) ? auth_info.card : auth_info[:card]
+        answer = auth_info.respond_to?(:answer) ? auth_info.answer : auth_info[:answer]
+
+        params = {
+          account: Unionpay.account,
+          userId: user_id,
+          card: card,
+          answer: answer
+        }
+        sign = Unionpay.sign(params)
+        params[:sign] = sign
+        connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
+        response = connection.get 'auth/answer', params
+        puts response.body
+      end
     end
     
   end
