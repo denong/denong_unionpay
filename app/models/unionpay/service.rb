@@ -7,6 +7,7 @@ module Unionpay
   class Service
     class << self
 
+      # 校验卡的信息
       def auth_card auth_info
 
         user_id = auth_info.respond_to?(:user_id) ? auth_info.user_id : auth_info[:user_id]
@@ -28,6 +29,7 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get '/auth/card', params
         puts response.body
+        response.body
       end
 
       def auth_status card
@@ -41,9 +43,10 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/authStatus', params
         puts response.body
+        response.body
       end
 
-
+      # 银行卡的认证答案，短信验证的话传入的是短信验证码
       def auth_answer answer_info
         user_id = auth_info.respond_to?(:user_id) ? auth_info.user_id : auth_info[:user_id]
         card = auth_info.respond_to?(:card) ? auth_info.card : auth_info[:card]
@@ -60,6 +63,7 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/answer', params
         puts response.body
+        response.body
       end
     end
     
