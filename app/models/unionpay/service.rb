@@ -29,7 +29,7 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get '/auth/card', params
         puts response.body
-        response.body
+        MultiJson.load  response.body
       end
 
       def auth_status card
@@ -43,14 +43,14 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/authStatus', params
         puts response.body
-        response.body
+        MultiJson.load response.body
       end
 
       # 银行卡的认证答案，短信验证的话传入的是短信验证码
       def auth_answer answer_info
-        user_id = auth_info.respond_to?(:user_id) ? auth_info.user_id : auth_info[:user_id]
-        card = auth_info.respond_to?(:card) ? auth_info.card : auth_info[:card]
-        answer = auth_info.respond_to?(:answer) ? auth_info.answer : auth_info[:answer]
+        user_id = answer_info.respond_to?(:user_id) ? answer_info.user_id : answer_info[:user_id]
+        card = answer_info.respond_to?(:card) ? answer_info.card : answer_info[:card]
+        answer = answer_info.respond_to?(:answer) ? answer_info.answer : answer_info[:answer]
 
         params = {
           account: Unionpay.account,
@@ -63,7 +63,7 @@ module Unionpay
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/answer', params
         puts response.body
-        response.body
+        MultiJson.load  response.body
       end
     end
     

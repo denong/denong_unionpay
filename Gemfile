@@ -26,8 +26,15 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# A set of responders modules to dry up your Rails 4.2+ app.
+gem "responders"
+
+gem "faraday"
+
+gem "multi_json"
+
 # Use Unicorn as the app server
-# gem 'unicorn'
+gem 'unicorn'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
