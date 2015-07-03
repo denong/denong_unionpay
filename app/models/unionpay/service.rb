@@ -14,10 +14,11 @@ module Unionpay
         card = auth_info.respond_to?(:card) ? auth_info.card : auth_info[:card]
         name = auth_info.respond_to?(:name) ? auth_info.name : auth_info[:name]
         mobile = auth_info.respond_to?(:mobile) ? auth_info.mobile : auth_info[:mobile]
+        auth_type = auth_info.respond_to?(:auth_type) ? auth_info.auth_type : auth_info[:auth_type]
 
         params = {
           account: Unionpay.account,
-          authType: 1,
+          authType: auth_type,
           userId: user_id,
           card: card,
           name: name,
