@@ -81,7 +81,8 @@ module Unionpay
         # logger.info response.body
         MultiJson.load response.body
       end
-      
+
     end
+  end
 
 end
