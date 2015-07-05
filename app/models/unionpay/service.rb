@@ -29,7 +29,7 @@ module Unionpay
 
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get '/auth/card', params
-        logger.info response.body
+        # logger.info response.body
         MultiJson.load  response.body
       end
 
@@ -43,7 +43,7 @@ module Unionpay
 
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/authStatus', params
-        logger.info response.body
+        # logger.info response.body
         MultiJson.load response.body
       end
 
@@ -63,7 +63,7 @@ module Unionpay
         params[:sign] = sign
         connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
         response = connection.get 'auth/answer', params
-        logger.info response.body
+        # logger.info response.body
         MultiJson.load  response.body
       end
     end
@@ -78,7 +78,7 @@ module Unionpay
 
       connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
       response = connection.get 'auth/finish', params
-      logger.info response.body
+      # logger.info response.body
       MultiJson.load response.body
     end
     
