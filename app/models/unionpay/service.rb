@@ -66,21 +66,22 @@ module Unionpay
         # logger.info response.body
         MultiJson.load  response.body
       end
+
+
+      def auth_finish card
+        params = {
+          account: Unionpay.account,
+          card: card,
+        }
+        sign = Unionpay.sign(params)
+        params[:sign] = sign
+
+        connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
+        response = connection.get 'auth/finish', params
+        # logger.info response.body
+        MultiJson.load response.body
+      end
+      
     end
 
-    def auth_finish card
-      params = {
-        account: Unionpay.account,
-        card: card,
-      }
-      sign = Unionpay.sign(params)
-      params[:sign] = sign
-
-      connection = Faraday::Connection.new Unionpay.server_url,  { ssl: { verify: false } }
-      response = connection.get 'auth/finish', params
-      # logger.info response.body
-      MultiJson.load response.body
-    end
-    
-  end
 end
