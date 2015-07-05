@@ -13,4 +13,8 @@ class AuthController < ApplicationController
   def status
     @response = Unionpay::Service.auth_status params[:card]
   end
+
+  def finish
+    @response = Unionpay::Service.auth_finish params[:card]
+  end
 end

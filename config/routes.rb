@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   post 'auth/card'
   post 'auth/answer'
   post 'auth/status'
+  post 'auth/finish'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
